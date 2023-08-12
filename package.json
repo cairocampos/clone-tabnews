@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Implementação do https://www.tabnews.com.br para o https://curso.dev",
   "scripts": {
-    "dev": "next dev"
+    "dev": "next dev",
+    "lint:check": "prettier --check ./src",
+    "lint:fix": "prettier --write ./src"
   },
   "author": "",
   "license": "MIT",
@@ -15,6 +17,7 @@
   "devDependencies": {
     "@types/node": "20.2.5",
     "@types/react": "18.2.9",
+    "prettier": "^3.0.1",
     "typescript": "^5.1.3"
   }
 }
