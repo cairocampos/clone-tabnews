@@ -1,18 +1,22 @@
-// import type { Config } from "@jest/types";
-// // Sync object
-// const config: Config.InitialOptions = {
-//   verbose: true,
-//   transform: {
-//     "^.+\\.ts?$": "ts-jest",
-//   },
-// };
-// export default config;
+import { pathsToModuleNameMapper } from "ts-jest";
+import { compilerOptions } from "./tsconfig.json";
+import dotenv from "dotenv";
+import { join } from "node:path";
 
-const nextJest = require("next/jest");
-
-const createJestConfig = nextJest({
-  // dir:'./src'
+dotenv.config({
+  path: join(__dirname, ".env.development"),
 });
-const jestConfig = createJestConfig();
 
-module.exports = jestConfig;
+export default {
+  rootDir: ".",
+  preset: "ts-jest",
+  transform: {
+    "^.+\\.(t|j)s$": "ts-jest",
+  },
+  testRegex: ".*\\.test\\.ts$",
+  moduleFileExtensions: ["js", "json", "ts"],
+  testEnvironment: "node",
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
+    prefix: "<rootDir>",
+  }),
+};

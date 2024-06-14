@@ -1,10 +1,17 @@
-import { Client } from "pg";
+import { Client, Submittable } from "pg";
 import { env } from "./env";
 
-async function query(queryObject: any) {
+type QueryObject = {
+  text: string;
+  values: any[];
+};
+
+type Query = QueryObject | string;
+
+async function query(statement: Query) {
   const client = await getNewClient();
   try {
-    const result = await client.query(queryObject);
+    const result = await client.query(statement);
     return result;
   } catch (error) {
     console.error(error);
@@ -40,5 +47,5 @@ function getSSLValues() {
     };
   }
 
-  return env.NODE_ENV === "production" ? true : false;
+  return env.NODE_ENV === "production";
 }
