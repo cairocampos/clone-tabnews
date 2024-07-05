@@ -11,7 +11,7 @@ export default async function migrations(
 ) {
   const allowedMethods = ["GET", "POST"];
   if (request.method && !allowedMethods.includes(request.method)) {
-    response.status(405).json({
+    return response.status(405).json({
       error: `Method "${request.method}" not allowed`,
     });
   }
