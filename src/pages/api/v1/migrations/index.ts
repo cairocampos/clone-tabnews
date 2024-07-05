@@ -16,7 +16,7 @@ export default async function migrations(
     });
   }
 
-  let dbClient: Client;
+  let dbClient: Client | null = null;
   try {
     dbClient = await database.getNewClient();
     const defaultMigrationOptions: RunnerOption = {
