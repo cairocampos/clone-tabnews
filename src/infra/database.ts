@@ -1,4 +1,4 @@
-import { Client, Submittable } from "pg";
+import { Client } from "pg";
 import { env } from "./env";
 
 type QueryObject = {
@@ -35,11 +35,6 @@ async function getNewClient() {
   return client;
 }
 
-export default {
-  query,
-  getNewClient,
-};
-
 function getSSLValues() {
   if (env.POSTGRES_CA) {
     return {
@@ -49,3 +44,10 @@ function getSSLValues() {
 
   return env.NODE_ENV === "production";
 }
+
+const database = {
+  query,
+  getNewClient,
+};
+
+export default database;
