@@ -7,7 +7,7 @@ dotenv.config({
   path: join(__dirname, ".env.development"),
 });
 
-export default {
+const config = {
   rootDir: ".",
   preset: "ts-jest",
   transform: {
@@ -21,3 +21,5 @@ export default {
   }),
   testTimeout: 60000,
 };
+
+export default config;
