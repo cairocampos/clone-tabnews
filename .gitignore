@@ -1,3 +1,5 @@
 .next
 node_modules
 .swc
+.cache_ggshield
+.env
