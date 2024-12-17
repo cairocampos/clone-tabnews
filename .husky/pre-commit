@@ -1,0 +1,2 @@
+# Run Git Guardian Secret Scan
+docker run --env-file ./.env -v $(pwd):/data --rm gitguardian/ggshield ggshield secret scan pre-commit
