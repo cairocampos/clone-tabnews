@@ -1,7 +1,7 @@
 import database from "@/infra/database";
 import { NextApiResponse, NextApiRequest } from "next";
 import migrationRunner, { RunnerOption } from "node-pg-migrate";
-import { join } from "node:path";
+import { resolve } from "node:path";
 import { Client } from "pg";
 
 export default async function migrations(
@@ -20,7 +20,7 @@ export default async function migrations(
     dbClient = await database.getNewClient();
     const defaultMigrationOptions: RunnerOption = {
       dbClient,
-      dir: join("src", "infra", "migrations"),
+      dir: resolve("src", "infra", "migrations"),
       direction: "up",
       migrationsTable: "pgmigrations",
       verbose: true,
