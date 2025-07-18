@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "Implementação do https://www.tabnews.com.br para o https://curso.dev",
   "scripts": {
-    "dev": "npm run services:up && npm run wait-for-postgres && npm run migration:up && next dev",
+    "dev": "npm run services:up && npm run services:wait:database && npm run migration:up && next dev",
     "services:up": "docker compose -f src/infra/compose.yaml up -d",
     "services:stop": "docker compose -f src/infra/compose.yaml stop",
     "services:down": "docker compose -f src/infra/compose.yaml down",
+    "services:wait:database": "tsx src/infra/scripts/wait-for-postgres.ts",
     "lint:prettier:check": "prettier --check ./src",
     "lint:prettier:fix": "prettier --write ./src",
     "lint:eslint:check": "next lint --dir .",
@@ -14,7 +15,6 @@
     "test:watch": "jest --watchAll --runInBand",
     "migration:create": "node-pg-migrate --migrations-dir src/infra/migrations create",
     "migration:up": "node-pg-migrate --migrations-dir src/infra/migrations --envPath .env.development up",
-    "wait-for-postgres": "tsx src/infra/scripts/wait-for-postgres.ts",
     "prepare": "husky",
     "commit": "cz"
   },
